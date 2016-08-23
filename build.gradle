@@ -1,0 +1,40 @@
+group 'org.synapsis'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = 2.14
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+buildscript{
+    repositories {
+        mavenCentral()
+    }
+    dependencies{
+        classpath ("org.springframework.boot:spring-boot-gradle-plugin:1.3.6.RELEASE")
+    }
+}
+
+sourceCompatibility = 1.5
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'synapsis-authorization',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile('io.jsonwebtoken:jjwt:0.6.0')
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+
+    compile 'org.springframework.boot:spring-boot-starter-jersey:1.3.5.RELEASE'
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+}
+
