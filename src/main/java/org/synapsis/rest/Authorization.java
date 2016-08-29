@@ -27,5 +27,12 @@ public class Authorization {
 		String jwt = authorizationService.createJWT(subject, profile);
 		return Response.ok().entity(jwt).build();
 	}
-
+	
+	@Path("/jwt/validation")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response verifyJwt(@QueryParam("jwt") String jwt) {
+		boolean status = authorizationService.verifyJWT(jwt);
+		return Response.ok().entity("Status : " + status).build();
+	}
 }
